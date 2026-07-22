@@ -1,0 +1,40 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email == "REPLACE_WITH_ADMIN_EMAIL";
+    }
+
+    match /players/{playerId}/reservations/{dayId} {
+      allow read: if true;
+
+      allow create: if
+        !exists(/databases/$(database)/documents/players/$(playerId)/reservations/$(dayId)) &&
+        request.resource.data.keys().hasOnly([
+          'playerId', 'playerName', 'day', 'amount', 'name', 'phone',
+          'email', 'payment', 'message', 'paid', 'createdAt'
+        ]) &&
+        request.resource.data.playerId == playerId &&
+        request.resource.data.day is int &&
+        request.resource.data.day >= 1 &&
+        request.resource.data.day <= 31 &&
+        request.resource.data.amount == request.resource.data.day &&
+        request.resource.data.name is string &&
+        request.resource.data.name.size() >= 1 &&
+        request.resource.data.name.size() <= 60 &&
+        request.resource.data.phone is string &&
+        request.resource.data.phone.size() <= 25 &&
+        request.resource.data.email is string &&
+        request.resource.data.email.size() <= 100 &&
+        request.resource.data.payment is string &&
+        request.resource.data.payment.size() <= 20 &&
+        request.resource.data.message is string &&
+        request.resource.data.message.size() <= 180 &&
+        request.resource.data.paid == false;
+
+      allow update, delete: if isAdmin();
+    }
+  }
+}
