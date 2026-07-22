@@ -4,7 +4,10 @@ service cloud.firestore {
   match /databases/{database}/documents {
     function isAdmin() {
       return request.auth != null
-        && request.auth.token.email == "thara.marrero@gmail.com";
+        && request.auth.token.email in [
+          "thara.marrero@gmail.com",
+          "ltorresvargas78@gmail.com"
+        ];
     }
 
     match /players/{playerId}/reservations/{dayId} {

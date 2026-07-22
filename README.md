@@ -23,7 +23,7 @@ A mobile-friendly 31 Day Challenge fundraiser hosted on GitHub Pages and synchro
 
 1. Open Firebase Console → Firestore Database → Rules.
 2. Copy the contents of `firestore.rules`.
-3. Before publishing, replace `REPLACE_WITH_ADMIN_EMAIL` with the email that will administer the fundraiser.
+3. Before publishing, confirm the approved administrator emails in the `isAdmin()` function.
 4. Publish the rules.
 
 ## Enable the admin account
@@ -31,7 +31,7 @@ A mobile-friendly 31 Day Challenge fundraiser hosted on GitHub Pages and synchro
 1. Firebase Console → Authentication → Get started.
 2. Enable **Email/Password** sign-in.
 3. Open **Users → Add user**.
-4. Create the administrator using the same email placed in `firestore.rules`.
+4. Create the administrator for each approved administrator listed in `firestore.rules`.
 5. Open `/admin.html` on the published site and sign in.
 
 ## Data structure
@@ -43,3 +43,11 @@ Each player has an independent calendar. A transaction prevents the same day fro
 ## Version 2 admin update
 
 The admin page now displays only the sign-in form until Firebase confirms an authenticated user. After successful sign-in, the dashboard appears and loads each player's reservations directly. This avoids exposing the dashboard layout before authentication and removes the collection-group query dependency.
+
+
+## Approved administrators
+
+- `thara.marrero@gmail.com`
+- `ltorresvargas78@gmail.com`
+
+The admin sign-in form is blank by default. Both administrators must exist in Firebase Authentication and use their own passwords.
