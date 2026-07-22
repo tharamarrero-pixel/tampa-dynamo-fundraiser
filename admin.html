@@ -14,16 +14,27 @@
 </header>
 <main>
 <nav class="nav"><a class="link-btn btn-light" href="index.html">← Public site</a></nav>
-<div id="errorBox" class="error"></div>
-<div id="loginPanel" class="panel" style="max-width:480px;margin:auto">
+<div id="errorBox" class="error" role="alert"></div>
+<div id="successBox" class="success" role="status"></div>
+
+<section id="authLoading" class="auth-loading">
+  <div class="spinner" aria-hidden="true"></div>
+  <p>Checking administrator access…</p>
+</section>
+
+<section id="loginPanel" class="panel login-panel hidden">
 <h2>Administrator sign in</h2>
-<p>Use the Firebase Authentication account created for the team administrator.</p>
-<label for="adminEmail">Email</label><input id="adminEmail" type="email" autocomplete="username">
+<p>Sign in to view donor information and manage reservations.</p>
+<label for="adminEmail">Email</label><input id="adminEmail" type="email" autocomplete="username" value="thara.marrero@gmail.com">
 <label for="adminPassword">Password</label><input id="adminPassword" type="password" autocomplete="current-password">
-<button id="loginBtn" class="btn btn-primary" style="margin-top:16px;width:100%">Sign in</button>
-</div>
+<button id="loginBtn" class="btn btn-primary full-btn" style="margin-top:16px">Sign in</button>
+</section>
 
 <section id="dashboard" class="hidden">
+<div class="admin-session-bar">
+  <div><strong>Signed in as</strong><br><span id="adminIdentity"></span></div>
+  <button id="logoutBtn" class="btn btn-light">Sign out</button>
+</div>
 <section class="stats">
 <div class="stat"><small>Total reservations</small><strong id="adminReservationCount">0</strong></div>
 <div class="stat"><small>Committed</small><strong id="adminCommitted">$0</strong></div>
@@ -31,7 +42,6 @@
 </section>
 <div class="toolbar">
 <div><button id="exportBtn" class="btn btn-dark">Export CSV</button></div>
-<div><button id="logoutBtn" class="btn btn-light">Sign out</button></div>
 </div>
 <div class="admin-panel">
 <div class="panel"><h3>Filter</h3><label for="playerFilter">Player</label><select id="playerFilter"></select><label for="donorFilter">Donor search</label><input id="donorFilter" type="search" placeholder="Name, email, or phone"></div>

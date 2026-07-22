@@ -39,3 +39,7 @@ A mobile-friendly 31 Day Challenge fundraiser hosted on GitHub Pages and synchro
 `players/{player-id}/reservations/{day-number}`
 
 Each player has an independent calendar. A transaction prevents the same day from being reserved twice for that player.
+
+## Version 2 admin update
+
+The admin page now displays only the sign-in form until Firebase confirms an authenticated user. After successful sign-in, the dashboard appears and loads each player's reservations directly. This avoids exposing the dashboard layout before authentication and removes the collection-group query dependency.
