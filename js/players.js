@@ -42,7 +42,7 @@ export const PLAYERS = [
   {
     "id": "samuel-kelly",
     "name": "Samuel Kelly",
-    "jersey": "No jersey number"
+    "jersey": "#2"
   },
   {
     "id": "sebastian-burton-16",
